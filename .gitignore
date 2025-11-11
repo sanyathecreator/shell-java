@@ -4,5 +4,8 @@
 # Ignore Gradle build output directory
 build
 
+# Ignore Eclipse/IDE build output directory
+bin
+
 # Ignore run script
 run.sh

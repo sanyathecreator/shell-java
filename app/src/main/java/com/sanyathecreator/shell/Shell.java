@@ -10,7 +10,7 @@ public class Shell {
             System.out.print("$ ");
             String input = scanner.nextLine();
             String[] parts = splitInput(input);
-            exit(parts);
+            handleExit(parts);
             handleInvalidCommand(input);
         }
     }
@@ -19,7 +19,7 @@ public class Shell {
         return input.split(" ");
     }
 
-    private void exit(String[] input) {
+    private void handleExit(String[] input) {
         if (input[0].equals("exit")) {
             int status = 0;
             System.exit(status);

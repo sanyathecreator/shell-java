@@ -2,6 +2,7 @@ package com.sanyathecreator.shell.command;
 
 public class ExitCommand implements Command {
 
+    @Override
     public void execute(String[] args) {
         int status = 0;
         if (args.length > 0) {

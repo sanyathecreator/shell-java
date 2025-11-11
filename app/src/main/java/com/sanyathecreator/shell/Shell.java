@@ -2,9 +2,15 @@ package com.sanyathecreator.shell;
 
 import java.util.Scanner;
 
+import com.sanyathecreator.shell.command.CommandRegistry;
 import com.sanyathecreator.shell.util.InputParser;
 
 public class Shell {
+    private CommandRegistry commandRegistry;
+
+    public Shell() {
+        commandRegistry = new CommandRegistry();
+    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -20,15 +26,11 @@ public class Shell {
             String command = InputParser.getCommand(parsedInput);
             String[] args = InputParser.getArguments(parsedInput);
 
-            handleExit(command, args);
-            handleInvalidCommand(input);
-        }
-    }
-
-    private void handleExit(String command, String[] args) {
-        if (command.equals("exit")) {
-            int status = 0;
-            System.exit(status);
+            if (commandRegistry.isBuiltin(command)) {
+                commandRegistry.get(command).execute(args);
+            } else {
+                handleInvalidCommand(input);
+            }
         }
     }
 

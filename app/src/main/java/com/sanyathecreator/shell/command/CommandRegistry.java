@@ -8,6 +8,7 @@ public class CommandRegistry {
 
     public CommandRegistry() {
         commands.put("exit", new ExitCommand());
+        commands.put("echo", new EchoCommand());
     }
 
     public Command get(String name) {

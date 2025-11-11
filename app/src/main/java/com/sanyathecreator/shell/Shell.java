@@ -9,7 +9,20 @@ public class Shell {
         while (true) {
             System.out.print("$ ");
             String input = scanner.nextLine();
+            String[] parts = splitInput(input);
+            exit(parts);
             handleInvalidCommand(input);
+        }
+    }
+
+    private String[] splitInput(String input) {
+        return input.split(" ");
+    }
+
+    private void exit(String[] input) {
+        if (input[0].equals("exit")) {
+            int status = 0;
+            System.exit(status);
         }
     }
 

@@ -2,6 +2,8 @@ package com.sanyathecreator.shell;
 
 import java.util.Scanner;
 
+import com.sanyathecreator.shell.util.InputParser;
+
 public class Shell {
 
     public void start() {
@@ -9,18 +11,22 @@ public class Shell {
         while (true) {
             System.out.print("$ ");
             String input = scanner.nextLine();
-            String[] parts = splitInput(input);
-            handleExit(parts);
+            String[] parsedInput = InputParser.splitInput(input);
+
+            if (parsedInput.length == 0 || InputParser.getCommand(parsedInput).isEmpty()) {
+                continue;
+            }
+
+            String command = InputParser.getCommand(parsedInput);
+            String[] args = InputParser.getArguments(parsedInput);
+
+            handleExit(command, args);
             handleInvalidCommand(input);
         }
     }
 
-    private String[] splitInput(String input) {
-        return input.split(" ");
-    }
-
-    private void handleExit(String[] input) {
-        if (input[0].equals("exit")) {
+    private void handleExit(String command, String[] args) {
+        if (command.equals("exit")) {
             int status = 0;
             System.exit(status);
         }

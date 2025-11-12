@@ -1,5 +1,9 @@
 package com.sanyathecreator.shell.util;
 
+/**
+ * Utility class for parsing user input into commands and arguments.
+ * Provides methods to split input and extract command components.
+ */
 public class InputParser {
     private static final String DELIMITER = " ";
     private static final int COMMAND_INDEX = 0;

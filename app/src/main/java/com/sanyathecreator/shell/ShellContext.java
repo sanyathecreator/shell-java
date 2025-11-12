@@ -1,5 +1,9 @@
 package com.sanyathecreator.shell;
 
+/**
+ * Stores shared shell environment context and configuration.
+ * Provides access to environment variables and shell state.
+ */
 public class ShellContext {
 
     public static final String PATH = System.getenv("PATH");

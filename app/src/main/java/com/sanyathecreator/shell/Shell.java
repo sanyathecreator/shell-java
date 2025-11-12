@@ -7,6 +7,11 @@ import com.sanyathecreator.shell.command.ExternalCommand;
 import com.sanyathecreator.shell.util.InputParser;
 import com.sanyathecreator.shell.util.PathResolver;
 
+/**
+ * Main shell class that handles the read-eval-print loop (REPL).
+ * Reads user input, parses commands, and dispatches them to either
+ * builtin commands or external executables.
+ */
 public class Shell {
 
     public void start() {
@@ -16,6 +21,7 @@ public class Shell {
             String input = scanner.nextLine();
             String[] parsedInput = InputParser.splitInput(input);
 
+            // Skip empty input
             if (parsedInput.length == 0 || InputParser.getCommand(parsedInput).isEmpty()) {
                 continue;
             }

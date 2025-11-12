@@ -1,5 +1,7 @@
 package com.sanyathecreator.shell.command;
 
+import com.sanyathecreator.shell.util.PathResolver;
+
 public class TypeCommand implements Command {
 
     @Override
@@ -12,7 +14,12 @@ public class TypeCommand implements Command {
         if (CommandRegistry.isBuiltin(command)) {
             System.out.println(command + " is a shell builtin");
         } else {
-            System.out.println(command + ": not found");
+            String commandPath = PathResolver.findExecutableInPath(command);
+            if (commandPath == null || commandPath.isEmpty()) {
+                System.out.println(command + ": not found");
+            } else {
+                System.out.println(command + " is " + commandPath);
+            }
         }
     }
 

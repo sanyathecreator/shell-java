@@ -3,7 +3,9 @@ package com.sanyathecreator.shell;
 import java.util.Scanner;
 
 import com.sanyathecreator.shell.command.CommandRegistry;
+import com.sanyathecreator.shell.command.ExternalCommand;
 import com.sanyathecreator.shell.util.InputParser;
+import com.sanyathecreator.shell.util.PathResolver;
 
 public class Shell {
     private CommandRegistry commandRegistry;
@@ -29,7 +31,13 @@ public class Shell {
             if (CommandRegistry.isBuiltin(command)) {
                 commandRegistry.get(command).execute(args);
             } else {
-                handleInvalidCommand(input);
+                String commandPath = PathResolver.findExecutableInPath(command);
+                if (commandPath != null) {
+                    ExternalCommand externalCommand = new ExternalCommand();
+                    externalCommand.execute(parsedInput);
+                } else {
+                    handleInvalidCommand(input);
+                }
             }
         }
     }

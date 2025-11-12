@@ -1,4 +1,4 @@
-package com.sanyathecreator.shell;
+package com.sanyathecreator.shell.core;
 
 /**
  * Stores shared shell environment context and configuration.

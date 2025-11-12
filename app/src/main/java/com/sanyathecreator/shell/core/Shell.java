@@ -1,4 +1,4 @@
-package com.sanyathecreator.shell;
+package com.sanyathecreator.shell.core;
 
 import java.util.Scanner;
 

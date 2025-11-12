@@ -2,7 +2,7 @@ package com.sanyathecreator.shell.util;
 
 import java.io.File;
 
-import com.sanyathecreator.shell.ShellContext;
+import com.sanyathecreator.shell.core.ShellContext;
 
 public class PathResolver {
 

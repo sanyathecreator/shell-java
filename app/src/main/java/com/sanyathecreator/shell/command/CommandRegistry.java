@@ -6,13 +6,13 @@ import java.util.Map;
 public class CommandRegistry {
     private static final Map<String, Command> commands = new HashMap<>();
 
-    public CommandRegistry() {
+    static {
         commands.put("exit", new ExitCommand());
         commands.put("echo", new EchoCommand());
         commands.put("type", new TypeCommand());
     }
 
-    public Command get(String name) {
+    public static Command get(String name) {
         return commands.get(name);
     }
 

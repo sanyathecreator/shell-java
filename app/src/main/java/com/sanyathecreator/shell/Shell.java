@@ -8,11 +8,6 @@ import com.sanyathecreator.shell.util.InputParser;
 import com.sanyathecreator.shell.util.PathResolver;
 
 public class Shell {
-    private CommandRegistry commandRegistry;
-
-    public Shell() {
-        commandRegistry = new CommandRegistry();
-    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -29,7 +24,7 @@ public class Shell {
             String[] args = InputParser.getArguments(parsedInput);
 
             if (CommandRegistry.isBuiltin(command)) {
-                commandRegistry.get(command).execute(args);
+                CommandRegistry.get(command).execute(args);
             } else {
                 String commandPath = PathResolver.findExecutableInPath(command);
                 if (commandPath != null) {

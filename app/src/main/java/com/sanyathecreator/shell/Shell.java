@@ -26,7 +26,7 @@ public class Shell {
             String command = InputParser.getCommand(parsedInput);
             String[] args = InputParser.getArguments(parsedInput);
 
-            if (commandRegistry.isBuiltin(command)) {
+            if (CommandRegistry.isBuiltin(command)) {
                 commandRegistry.get(command).execute(args);
             } else {
                 handleInvalidCommand(input);

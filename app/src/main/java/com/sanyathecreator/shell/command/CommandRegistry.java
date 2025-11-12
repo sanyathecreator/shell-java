@@ -9,13 +9,14 @@ public class CommandRegistry {
     public CommandRegistry() {
         commands.put("exit", new ExitCommand());
         commands.put("echo", new EchoCommand());
+        commands.put("type", new TypeCommand());
     }
 
     public Command get(String name) {
         return commands.get(name);
     }
 
-    public boolean isBuiltin(String name) {
+    public static boolean isBuiltin(String name) {
         return commands.containsKey(name);
     }
 }

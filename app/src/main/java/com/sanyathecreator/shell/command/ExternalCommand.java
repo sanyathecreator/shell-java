@@ -14,7 +14,7 @@ public class ExternalCommand implements Command {
             ProcessBuilder processBuilder = new ProcessBuilder(args);
 
             // Set working directory for the external process
-            processBuilder.directory(new File(ShellContext.currentDirectory));
+            processBuilder.directory(new File(ShellContext.getCurrentDirectory()));
             Process process = processBuilder.start();
 
             // Read output stream

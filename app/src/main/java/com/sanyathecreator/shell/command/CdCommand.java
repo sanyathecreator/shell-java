@@ -51,7 +51,7 @@ public class CdCommand implements Command {
     }
 
     private boolean validateDirectory(File directory) {
-        return !directory.exists() || !directory.isDirectory();
+        return directory.exists() && directory.isDirectory();
     }
 
     private void printErrorMessage(String path) {

@@ -11,33 +11,51 @@ public class CdCommand implements Command {
         String path = args[0];
         File directory;
 
-        // Handle tilder(~) for home directory
-        if (path.equals("~") || path.startsWith("~/")) {
-            path = path.replaceFirst("^~", ShellContext.HOME);
-        }
+        // Handle tilde(~) for home directory
+        path = expandPath(path);
 
-        if (path.startsWith("/")) {
-            // Absolute path
-            directory = new File(path);
-        } else {
-            // Relative path
-            directory = new File(ShellContext.getCurrentDirectory(), path);
-        }
+        directory = resolvePath(path);
 
         // Normalize path for . and .. handling
         try {
             directory = directory.getCanonicalFile();
         } catch (Exception e) {
-            System.out.println("cd: " + path + ": No such file or directory");
+            printErrorMessage(path);
             return;
         }
 
-        if (!directory.exists() || !directory.isDirectory()) {
-            System.out.println("cd: " + path + ": No such file or directory");
+        if (!validateDirectory(directory)) {
+            printErrorMessage(path);
             return;
         }
 
         ShellContext.setCurrentDirectory(directory.getAbsolutePath());
+    }
+
+    private String expandPath(String path) {
+        if (path.equals("~") || path.startsWith("~/")) {
+            path = path.replaceFirst("^~", ShellContext.HOME);
+        }
+
+        return path;
+    }
+
+    private File resolvePath(String path) {
+        if (path.startsWith("/")) {
+            // Absolute path
+            return new File(path);
+        }
+
+        // Relative path
+        return new File(ShellContext.getCurrentDirectory(), path);
+    }
+
+    private boolean validateDirectory(File directory) {
+        return !directory.exists() || !directory.isDirectory();
+    }
+
+    private void printErrorMessage(String path) {
+        System.out.println("cd: " + path + ": No such file or directory");
     }
 
 }

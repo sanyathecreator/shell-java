@@ -24,6 +24,14 @@ public class CdCommand implements Command {
             directory = new File(ShellContext.getCurrentDirectory(), path);
         }
 
+        // Normalize path for . and .. handling
+        try {
+            directory = directory.getCanonicalFile();
+        } catch (Exception e) {
+            System.out.println("cd: " + path + ": No such file or directory");
+            return;
+        }
+
         if (!directory.exists() || !directory.isDirectory()) {
             System.out.println("cd: " + path + ": No such file or directory");
             return;

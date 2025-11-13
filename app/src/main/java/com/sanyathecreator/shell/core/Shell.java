@@ -32,8 +32,7 @@ public class Shell {
             if (CommandRegistry.isBuiltin(command)) {
                 CommandRegistry.get(command).execute(args);
             } else {
-                String commandPath = PathResolver.findExecutableInPath(command);
-                if (commandPath != null) {
+                if (PathResolver.findExecutableInPath(command) != null) {
                     ExternalCommand externalCommand = new ExternalCommand();
                     externalCommand.execute(parsedInput);
                 } else {

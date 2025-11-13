@@ -10,27 +10,29 @@ public class ExternalCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder(args);
+        ProcessBuilder processBuilder = new ProcessBuilder(args);
+        // Set working directory for external process
+        processBuilder.directory(new File(ShellContext.getCurrentDirectory()));
 
-            // Set working directory for the external process
-            processBuilder.directory(new File(ShellContext.getCurrentDirectory()));
+        try {
             Process process = processBuilder.start();
 
-            // Read output stream
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
 
-            // Read error stream
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            while ((line = errorReader.readLine()) != null) {
-                System.err.println(line);
-            }
+                String line;
+                // Read output stream
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
 
-            process.waitFor();
+                // Read error stream
+                while ((line = errorReader.readLine()) != null) {
+                    System.err.println(line);
+                }
+
+                process.waitFor();
+            }
         } catch (Exception e) {
             System.err.println("Error executing command: " + e.getMessage());
         }

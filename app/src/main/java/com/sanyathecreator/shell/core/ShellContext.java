@@ -7,6 +7,7 @@ package com.sanyathecreator.shell.core;
 public class ShellContext {
 
     public static final String PATH = System.getenv("PATH");
+    public static final String HOME = System.getenv("HOME");
     private static String currentDirectory = System.getProperty("user.dir");
 
     public static String getCurrentDirectory() {

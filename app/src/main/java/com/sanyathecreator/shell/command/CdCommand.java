@@ -11,6 +11,11 @@ public class CdCommand implements Command {
         String path = args[0];
         File directory;
 
+        // Handle tilder(~) for home directory
+        if (path.equals("~") || path.startsWith("~/")) {
+            path = path.replaceFirst("^~", ShellContext.HOME);
+        }
+
         if (path.startsWith("/")) {
             // Absolute path
             directory = new File(path);

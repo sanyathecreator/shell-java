@@ -16,6 +16,7 @@ public class CommandRegistry {
         commands.put("echo", new EchoCommand());
         commands.put("type", new TypeCommand());
         commands.put("pwd", new PwdCommand());
+        commands.put("cd", new CdCommand());
     }
 
     public static Command get(String name) {

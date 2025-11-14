@@ -6,15 +6,30 @@ package com.sanyathecreator.shell.core;
  */
 public class ShellContext {
 
-    public static final String PATH = System.getenv("PATH");
-    public static final String HOME = System.getenv("HOME");
-    private static String currentDirectory = System.getProperty("user.dir");
+    private final String PATH;
+    private final String HOME;
 
-    public static String getCurrentDirectory() {
+    private String currentDirectory;
+
+    public ShellContext() {
+        PATH = System.getenv("PATH");
+        HOME = System.getenv("HOME");
+        currentDirectory = System.getProperty("user.dir");
+    }
+
+    public String getPathEnv() {
+        return PATH;
+    }
+
+    public String getHomeEnv() {
+        return HOME;
+    }
+
+    public String getCurrentDirectory() {
         return currentDirectory;
     }
 
-    public static void setCurrentDirectory(String directory) {
+    public void setCurrentDirectory(String directory) {
         currentDirectory = directory;
     }
 

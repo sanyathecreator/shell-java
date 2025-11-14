@@ -1,9 +1,11 @@
 package com.sanyathecreator.shell.command;
 
+import com.sanyathecreator.shell.core.ShellContext;
+
 public class ExitCommand implements Command {
 
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args, ShellContext context) {
         int status = 0;
         if (args.length > 0) {
             try {

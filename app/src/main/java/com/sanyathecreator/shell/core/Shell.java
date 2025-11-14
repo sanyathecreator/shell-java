@@ -13,6 +13,11 @@ import com.sanyathecreator.shell.util.PathResolver;
  * builtin commands or external executables.
  */
 public class Shell {
+    private ShellContext shellContext;
+
+    public Shell() {
+        shellContext = new ShellContext();
+    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -30,11 +35,11 @@ public class Shell {
             String[] args = InputParser.getArguments(parsedInput);
 
             if (CommandRegistry.isBuiltin(command)) {
-                CommandRegistry.get(command).execute(args);
+                CommandRegistry.get(command).execute(args, shellContext);
             } else {
-                if (PathResolver.findExecutableInPath(command) != null) {
+                if (PathResolver.findExecutableInPath(command, shellContext) != null) {
                     ExternalCommand externalCommand = new ExternalCommand();
-                    externalCommand.execute(parsedInput);
+                    externalCommand.execute(parsedInput, shellContext);
                 } else {
                     handleInvalidCommand(input);
                 }

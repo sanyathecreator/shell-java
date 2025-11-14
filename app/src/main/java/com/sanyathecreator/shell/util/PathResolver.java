@@ -6,8 +6,8 @@ import com.sanyathecreator.shell.core.ShellContext;
 
 public class PathResolver {
 
-    public static String findExecutableInPath(String command) {
-        String pathEnv = ShellContext.PATH;
+    public static String findExecutableInPath(String command, ShellContext context) {
+        String pathEnv = context.getPathEnv();
 
         String[] splitDirs = pathEnv.split(File.pathSeparator);
         for (String dir : splitDirs) {

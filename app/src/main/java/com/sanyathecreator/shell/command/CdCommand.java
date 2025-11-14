@@ -7,14 +7,14 @@ import com.sanyathecreator.shell.core.ShellContext;
 public class CdCommand implements Command {
 
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args, ShellContext context) {
         String path = args[0];
         File directory;
 
         // Handle tilde(~) for home directory
-        path = expandPath(path);
+        path = expandPath(path, context);
 
-        directory = resolvePath(path);
+        directory = resolvePath(path, context);
 
         // Normalize path for . and .. handling
         try {
@@ -29,25 +29,25 @@ public class CdCommand implements Command {
             return;
         }
 
-        ShellContext.setCurrentDirectory(directory.getAbsolutePath());
+        context.setCurrentDirectory(directory.getAbsolutePath());
     }
 
-    private String expandPath(String path) {
+    private String expandPath(String path, ShellContext context) {
         if (path.equals("~") || path.startsWith("~/")) {
-            path = path.replaceFirst("^~", ShellContext.HOME);
+            path = path.replaceFirst("^~", context.getHomeEnv());
         }
 
         return path;
     }
 
-    private File resolvePath(String path) {
+    private File resolvePath(String path, ShellContext context) {
         if (path.startsWith("/")) {
             // Absolute path
             return new File(path);
         }
 
         // Relative path
-        return new File(ShellContext.getCurrentDirectory(), path);
+        return new File(context.getCurrentDirectory(), path);
     }
 
     private boolean validateDirectory(File directory) {

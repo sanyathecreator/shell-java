@@ -5,8 +5,8 @@ import com.sanyathecreator.shell.core.ShellContext;
 public class PwdCommand implements Command {
 
     @Override
-    public void execute(String[] args) {
-        System.out.println(ShellContext.getCurrentDirectory());
+    public void execute(String[] args, ShellContext context) {
+        System.out.println(context.getCurrentDirectory());
     }
 
 }

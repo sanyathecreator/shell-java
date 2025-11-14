@@ -9,10 +9,10 @@ import com.sanyathecreator.shell.core.ShellContext;
 public class ExternalCommand implements Command {
 
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args, ShellContext context) {
         ProcessBuilder processBuilder = new ProcessBuilder(args);
         // Set working directory for external process
-        processBuilder.directory(new File(ShellContext.getCurrentDirectory()));
+        processBuilder.directory(new File(context.getCurrentDirectory()));
 
         try {
             Process process = processBuilder.start();

@@ -29,6 +29,15 @@ public class InputParser {
         boolean insideQuotes = false;
 
         for (int i = 0; i < input.length(); i++) {
+            if (i == input.length() - 1) {
+                if (input.charAt(i) == '\'') {
+                    end = i;
+                    result = result + input.substring(start, end);
+                } else {
+                    result = result + input.substring(start);
+                }
+                break;
+            }
             if (!insideQuotes && i == input.length() - 1) {
                 result = result + input.substring(start);
             }
@@ -45,11 +54,9 @@ public class InputParser {
                     insideQuotes = true;
                 }
             } else if (input.charAt(i) == '\'' && insideQuotes) {
-                if (i != input.length() - 1) {
-                    if (input.charAt(i + 1) == '\'') {
-                        end = i;
-                        insideQuotes = false;
-                    }
+                if (i < input.length() - 1 && input.charAt(i + 1) == '\'') {
+                    end = i;
+                    insideQuotes = false;
                 }
                 end = i;
                 result = result + input.substring(start, end);

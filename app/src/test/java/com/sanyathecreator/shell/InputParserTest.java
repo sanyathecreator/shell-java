@@ -11,7 +11,8 @@ public class InputParserTest {
     public void testSingleQuotesParsing() {
         String input = "'helloworld'";
         String expected = "helloworld";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 
@@ -19,7 +20,8 @@ public class InputParserTest {
     public void testSingleQuotesWithSpaceParsing() {
         String input = "'hello world'";
         String expected = "hello world";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 
@@ -27,7 +29,8 @@ public class InputParserTest {
     public void testSingleQuotesWithSpacesParsing() {
         String input = "'hello   world'";
         String expected = "hello   world";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 
@@ -35,7 +38,8 @@ public class InputParserTest {
     public void testSingleQuotesParsingConcatenation() {
         String input = "'hello''world'";
         String expected = "helloworld";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 
@@ -43,7 +47,8 @@ public class InputParserTest {
     public void testSingleQuotesIgnoringParsing() {
         String input = "hello''world";
         String expected = "helloworld";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 
@@ -51,7 +56,17 @@ public class InputParserTest {
     public void testStringWithoutQuotesParsing() {
         String input = "hello world";
         String expected = "hello world";
-        String actual = InputParser.parseSingleQuotes(input);
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testStringWithoutQuotesAndWithSpacesParsing() {
+        String input = "hello     world";
+        String expected = "hello world";
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
 }

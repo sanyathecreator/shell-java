@@ -1,5 +1,9 @@
 package com.sanyathecreator.shell.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Utility class for parsing user input into commands and arguments.
  * Provides methods to split input and extract command components.
@@ -22,48 +26,32 @@ public class InputParser {
         return arguments;
     }
 
-    public static String parseSingleQuotes(String input) {
-        int start = 0;
-        int end = 0;
-        String result = "";
-        boolean insideQuotes = false;
+    public static String[] parseSingleQuotes(String input) {
+        boolean isInsideSingleQuotes = false;
+        List<String> keywords = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < input.length(); i++) {
-            if (i == input.length() - 1) {
-                if (input.charAt(i) == '\'') {
-                    end = i;
-                    result = result + input.substring(start, end);
-                } else {
-                    result = result + input.substring(start);
+            char character = input.charAt(i);
+
+            if (character == '\'') {
+                isInsideSingleQuotes = !isInsideSingleQuotes;
+            } else if (character == ' ' && !isInsideSingleQuotes) {
+                if (builder.length() > 0) {
+                    keywords.add(builder.toString());
+                    builder = new StringBuilder();
                 }
-                break;
-            }
-            if (!insideQuotes && i == input.length() - 1) {
-                result = result + input.substring(start);
-            }
-            if (input.charAt(i) == '\'' && !insideQuotes) {
-                if (input.charAt(i + 1) == '\'') {
-                    end = i;
-                    i++;
-                    result = result + input.substring(start, end);
-                    start = i + 1;
-                } else {
-                    // Skip
-                    i++;
-                    start = i;
-                    insideQuotes = true;
-                }
-            } else if (input.charAt(i) == '\'' && insideQuotes) {
-                if (i < input.length() - 1 && input.charAt(i + 1) == '\'') {
-                    end = i;
-                    insideQuotes = false;
-                }
-                end = i;
-                result = result + input.substring(start, end);
+            } else {
+                builder.append(character);
             }
         }
 
-        return result;
+        // Add last token
+        if (!builder.isEmpty()) {
+            keywords.add(builder.toString());
+        }
+
+        return keywords.toArray(new String[0]);
     }
 
 }

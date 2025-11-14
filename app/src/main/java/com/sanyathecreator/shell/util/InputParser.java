@@ -22,4 +22,8 @@ public class InputParser {
         return arguments;
     }
 
+    public static String parseSingleQuotes(String input) {
+        return null;
+    }
+
 }

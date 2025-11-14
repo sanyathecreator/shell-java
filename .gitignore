@@ -9,3 +9,6 @@ bin
 
 # Ignore run script
 run.sh
+
+# Ignore test report opener script
+open-test-report.sh

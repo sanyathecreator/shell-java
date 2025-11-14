@@ -8,7 +8,7 @@ import com.sanyathecreator.shell.util.InputParser;
 
 public class InputParserTest {
     @Test
-    public void testSingleQuotesPasring() {
+    public void testSingleQuotesParsing() {
         String input = "'helloworld'";
         String expected = "helloworld";
         String actual = InputParser.parseSingleQuotes(input);
@@ -16,7 +16,7 @@ public class InputParserTest {
     }
 
     @Test
-    public void testSingleQuotesWithSpacePasring() {
+    public void testSingleQuotesWithSpaceParsing() {
         String input = "'hello world'";
         String expected = "hello world";
         String actual = InputParser.parseSingleQuotes(input);
@@ -24,7 +24,7 @@ public class InputParserTest {
     }
 
     @Test
-    public void testSingleQuotesWithSpacesPasring() {
+    public void testSingleQuotesWithSpacesParsing() {
         String input = "'hello   world'";
         String expected = "hello   world";
         String actual = InputParser.parseSingleQuotes(input);
@@ -32,7 +32,7 @@ public class InputParserTest {
     }
 
     @Test
-    public void testSingleQuotesPasringConcatenation() {
+    public void testSingleQuotesParsingConcatenation() {
         String input = "'hello''world'";
         String expected = "helloworld";
         String actual = InputParser.parseSingleQuotes(input);

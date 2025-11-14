@@ -23,7 +23,40 @@ public class InputParser {
     }
 
     public static String parseSingleQuotes(String input) {
-        return null;
+        int start = 0;
+        int end = 0;
+        String result = "";
+        boolean insideQuotes = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!insideQuotes && i == input.length() - 1) {
+                result = result + input.substring(start);
+            }
+            if (input.charAt(i) == '\'' && !insideQuotes) {
+                if (input.charAt(i + 1) == '\'') {
+                    end = i;
+                    i++;
+                    result = result + input.substring(start, end);
+                    start = i + 1;
+                } else {
+                    // Skip
+                    i++;
+                    start = i;
+                    insideQuotes = true;
+                }
+            } else if (input.charAt(i) == '\'' && insideQuotes) {
+                if (i != input.length() - 1) {
+                    if (input.charAt(i + 1) == '\'') {
+                        end = i;
+                        insideQuotes = false;
+                    }
+                }
+                end = i;
+                result = result + input.substring(start, end);
+            }
+        }
+
+        return result;
     }
 
 }

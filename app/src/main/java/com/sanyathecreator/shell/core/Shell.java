@@ -40,7 +40,10 @@ public class Shell {
             } else {
                 if (PathResolver.findExecutableInPath(command, shellContext) != null) {
                     ExternalCommand externalCommand = new ExternalCommand();
-                    externalCommand.execute(parsedInput, shellContext);
+                    String[] fullCommand = new String[args.length + 1];
+                    fullCommand[0] = command;
+                    System.arraycopy(args, 0, fullCommand, 1, args.length);
+                    externalCommand.execute(fullCommand, shellContext);
                 } else {
                     handleInvalidCommand(input);
                 }

@@ -32,8 +32,8 @@ public class Shell {
             }
 
             String command = InputParser.getCommand(parsedInput);
-            String[] arguments = InputParser.getArguments(parsedInput);
-            String[] args = InputParser.parseSingleQuotes(String.join(" ", arguments));
+            String arguments = InputParser.getArguments(parsedInput);
+            String[] args = arguments != null ? InputParser.parseSingleQuotes(arguments) : new String[0];
 
             if (CommandRegistry.isBuiltin(command)) {
                 CommandRegistry.get(command).execute(args, shellContext);

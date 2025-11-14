@@ -46,4 +46,12 @@ public class InputParserTest {
         String actual = InputParser.parseSingleQuotes(input);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testStringWithoutQuotesParsing() {
+        String input = "hello world";
+        String expected = "hello world";
+        String actual = InputParser.parseSingleQuotes(input);
+        assertEquals(expected, actual);
+    }
 }

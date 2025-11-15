@@ -13,22 +13,18 @@ public class ExternalCommand implements Command {
         ProcessBuilder processBuilder = new ProcessBuilder(args);
         // Set working directory for external process
         processBuilder.directory(new File(context.getCurrentDirectory()));
+        // Merge stderr and stdout to prevent deadlock
+        processBuilder.redirectErrorStream(true);
 
         try {
             Process process = processBuilder.start();
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                    BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 
                 String line;
                 // Read output stream
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
-                }
-
-                // Read error stream
-                while ((line = errorReader.readLine()) != null) {
-                    System.err.println(line);
                 }
 
                 process.waitFor();

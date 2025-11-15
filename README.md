@@ -26,7 +26,7 @@ This project is a functional command-line shell that mimics the behavior of popu
 ### Advanced Features Progress
 
 #### Input Parsing & Quoting
-- [ ] Single quote handling (`'text'`)
+- [x] Single quote handling (`'text'`)
 - [ ] Double quote handling (`"text"`)
 - [ ] Escape sequences (`\n`, `\t`, etc.)
 - [ ] Variable expansion (`$VAR`, `${VAR}`)

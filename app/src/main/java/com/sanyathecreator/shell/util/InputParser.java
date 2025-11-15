@@ -39,6 +39,7 @@ public class InputParser {
                 insideSingleQuotes = !insideSingleQuotes;
                 // Skip space if outside single quotes
             } else if (character == ' ' && !insideSingleQuotes) {
+                // Keep only one space between tokens
                 if (currentToken.length() > 0) {
                     tokens.add(currentToken.toString());
                     currentToken = new StringBuilder();

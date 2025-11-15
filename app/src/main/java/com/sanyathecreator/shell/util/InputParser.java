@@ -2,7 +2,6 @@ package com.sanyathecreator.shell.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Utility class for parsing user input into commands and arguments.
@@ -29,31 +28,32 @@ public class InputParser {
     }
 
     public static String[] parseSingleQuotes(String input) {
-        boolean isInsideSingleQuotes = false;
-        List<String> keywords = new ArrayList<>();
-        StringBuilder builder = new StringBuilder();
+        boolean insideSingleQuotes = false;
+        List<String> tokens = new ArrayList<>();
+        StringBuilder currentToken = new StringBuilder();
 
         for (int i = 0; i < input.length(); i++) {
             char character = input.charAt(i);
 
             if (character == '\'') {
-                isInsideSingleQuotes = !isInsideSingleQuotes;
-            } else if (character == ' ' && !isInsideSingleQuotes) {
-                if (builder.length() > 0) {
-                    keywords.add(builder.toString());
-                    builder = new StringBuilder();
+                insideSingleQuotes = !insideSingleQuotes;
+                // Skip space if outside single quotes
+            } else if (character == ' ' && !insideSingleQuotes) {
+                if (currentToken.length() > 0) {
+                    tokens.add(currentToken.toString());
+                    currentToken = new StringBuilder();
                 }
             } else {
-                builder.append(character);
+                currentToken.append(character);
             }
         }
 
         // Add last token
-        if (!builder.isEmpty()) {
-            keywords.add(builder.toString());
+        if (!currentToken.isEmpty()) {
+            tokens.add(currentToken.toString());
         }
 
-        return keywords.toArray(new String[0]);
+        return tokens.toArray(new String[0]);
     }
 
 }

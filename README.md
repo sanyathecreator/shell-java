@@ -76,19 +76,19 @@ The codebase follows a clean, modular architecture:
 
 ```
 com.sanyathecreator.shell/
-├── Main.java                    # Entry point
+├── Main.java                   # Entry point
 ├── core/
 │   ├── Shell.java              # Main REPL implementation
 │   └── ShellContext.java       # Shared shell state (working directory, etc.)
 ├── command/
 │   ├── Command.java            # Command interface
-│   ├── CommandRegistry.java   # Builtin command registry
+│   ├── CommandRegistry.java    # Builtin command registry
 │   ├── EchoCommand.java        # Echo implementation
 │   ├── ExitCommand.java        # Exit implementation
 │   ├── PwdCommand.java         # Pwd implementation
 │   ├── CdCommand.java          # Cd implementation
 │   ├── TypeCommand.java        # Type implementation
-│   └── ExternalCommand.java   # External command executor
+│   └── ExternalCommand.java    # External command executor
 └── util/
     ├── InputParser.java        # Input parsing utilities
     └── PathResolver.java       # PATH lookup utilities

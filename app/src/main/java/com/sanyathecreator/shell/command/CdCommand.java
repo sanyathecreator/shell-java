@@ -4,6 +4,10 @@ import java.io.File;
 
 import com.sanyathecreator.shell.core.ShellContext;
 
+/**
+ * Builtin command that changes the current working directory.
+ * Supports absolute paths, relative paths, and tilde expansion for home directory.
+ */
 public class CdCommand implements Command {
 
     @Override

@@ -2,6 +2,10 @@ package com.sanyathecreator.shell.command;
 
 import com.sanyathecreator.shell.core.ShellContext;
 
+/**
+ * Builtin command that exits the shell.
+ * Accepts an optional integer exit code (defaults to 0).
+ */
 public class ExitCommand implements Command {
 
     @Override

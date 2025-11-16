@@ -12,14 +12,32 @@ public class InputParser {
     private static final int COMMAND_INDEX = 0;
     private static final int ARGUMENTS_INDEX = 1;
 
+    /**
+     * Splits user input into command and arguments parts.
+     *
+     * @param input the raw user input string
+     * @return array where [0] is the command and [1] is the arguments (if any)
+     */
     public static String[] splitInput(String input) {
         return input.split(DELIMITER, 2);
     }
 
+    /**
+     * Extracts the command name from split input.
+     *
+     * @param splitInput the input array from splitInput()
+     * @return the command name
+     */
     public static String getCommand(String[] splitInput) {
         return splitInput[COMMAND_INDEX];
     }
 
+    /**
+     * Extracts the arguments from split input.
+     *
+     * @param splitInput the input array from splitInput()
+     * @return the arguments string, or null if no arguments
+     */
     public static String getArguments(String[] splitInput) {
         if (splitInput.length > 1) {
             return splitInput[ARGUMENTS_INDEX];
@@ -27,6 +45,14 @@ public class InputParser {
         return null;
     }
 
+    /**
+     * Parses a string containing single-quoted tokens.
+     * Handles quoted strings and preserves spaces within quotes.
+     * Multiple spaces between tokens are collapsed into single spaces.
+     *
+     * @param input the string to parse
+     * @return array of parsed tokens with quotes removed
+     */
     public static String[] parseSingleQuotes(String input) {
         boolean insideSingleQuotes = false;
         List<String> tokens = new ArrayList<>();

@@ -3,6 +3,11 @@ package com.sanyathecreator.shell.command;
 import com.sanyathecreator.shell.core.ShellContext;
 import com.sanyathecreator.shell.util.PathResolver;
 
+/**
+ * Builtin command that identifies the type of a command.
+ * Reports whether a command is a builtin or an external executable,
+ * and provides the full path for external commands.
+ */
 public class TypeCommand implements Command {
 
     @Override

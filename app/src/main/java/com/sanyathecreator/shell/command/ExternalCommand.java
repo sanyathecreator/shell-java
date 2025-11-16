@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 
 import com.sanyathecreator.shell.core.ShellContext;
 
+/**
+ * Handles execution of external system commands.
+ * Spawns a separate process for commands that are not builtin to the shell.
+ */
 public class ExternalCommand implements Command {
 
     @Override

@@ -78,4 +78,13 @@ public class InputParserTest {
         String actual = String.join(" ", parsed);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testStringWithQuotesAndWithSpacesInQuotesParsing() {
+        String input = "'hello '     ' world'";
+        String expected = "hello   world";
+        String[] parsed = InputParser.parseSingleQuotes(input);
+        String actual = String.join(" ", parsed);
+        assertEquals(expected, actual);
+    }
 }
